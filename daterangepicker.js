@@ -120,10 +120,10 @@
 
 
             if (typeof options.startDate == 'object')
-                this.startDate = options.startDate;
+                this.startDate = options.startDate.startOf('day');
 
             if (typeof options.endDate == 'object')
-                this.endDate = options.endDate;
+                this.endDate = options.endDate.startOf('day');
 
             if (typeof options.minDate == 'object')
                 this.minDate = options.minDate;
@@ -282,7 +282,7 @@
             this.endDate = end;
 
             this.updateView();
-            this.cb(this.startDate.toDate(), this.endDate.toDate());
+            this.cb(this.startDate, this.endDate);
             this.updateCalendars();
         },
 
@@ -294,8 +294,8 @@
             if (this.element.is('input')) {
                 this.element.val(this.cleared ? '' : this.startDate.format(this.format) + this.separator + this.endDate.format(this.format));
             }
-            var arg1 = (this.cleared ? null : this.startDate.toDate()),
-                arg2 = (this.cleared ? null : this.endDate.toDate());
+            var arg1 = (this.cleared ? null : this.startDate),
+                arg2 = (this.cleared ? null : this.endDate);
             this.cleared = false;
             this.cb(arg1,arg2);
         },
@@ -524,7 +524,7 @@
             {
                  html += '<th></th>';
             }
-            html += '<th colspan="5" style="width: auto">' + this.locale.monthNames[calendar[1][1].month()] + calendar[1][1].format(" yyyy") + '</th>';
+            html += '<th colspan="5" style="width: auto">' + this.locale.monthNames[calendar[1][1].month()] + calendar[1][1].format(" YYYY") + '</th>';
             if (!maxDate || maxDate > calendar[1][1])
             {
                 html += '<th class="next available"><i class="icon-arrow-right"></i></th>';
@@ -554,14 +554,14 @@
 
                 // add week number
                 if (this.showWeekNumbers)
-                    html += '<td class="week">' + calendar[row][0].week() + '</td>';
+                    html += '<td class="week">' + calendar[row][0].format('w') + '</td>';
 
                 for (var col = 0; col < 7; col++) {
                     var cname = 'available ';
                     cname += (calendar[row][col].month() == calendar[1][1].month()) ? '' : 'off';
 
                     // Normalise the time so the comparison won't fail
-                    selected.setHours(0,0,0,0);
+                    selected.hours(0);
 
                     if ( (minDate && calendar[row][col] < minDate) || (maxDate && calendar[row][col] > maxDate))
                     {
