@@ -16,6 +16,15 @@
         var hasOptions = typeof options == 'object';
         var localeObject;
 
+        daysOfWeek = [];
+        monthNames = [];
+        for(var i=0; i<7; i++){
+            daysOfWeek.push(moment().day(i).format('dd'));
+        }
+        for(var i=0; i<12; i++){
+            monthNames.push(moment().month(i).format('MMMM'));
+        }
+
         //state
         this.startDate = moment().startOf('day');
         this.endDate = moment().startOf('day');
@@ -26,7 +35,7 @@
         this.ranges = {};
         this.opens = 'right';
         this.cb = function () { };
-        this.format = 'MM/DD/YYYY';
+        this.format = 'L';
         this.separator = ' - ';
         this.showWeekNumbers = false;
         this.buttonClasses = ['btn-success'];
@@ -37,8 +46,8 @@
             toLabel: 'To',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
-            daysOfWeek: moment.weekdaysMin,
-            monthNames: moment.months,
+            daysOfWeek: daysOfWeek,
+            monthNames: monthNames,
             firstDay: 0
         };
 
@@ -107,16 +116,16 @@
                 this.separator = options.separator;
 
             if (typeof options.startDate == 'string')
-                this.startDate = moment(Date.parse(options.startDate, this.format));
+                this.startDate = moment(options.startDate, this.format);
 
             if (typeof options.endDate == 'string')
-                this.endDate = moment(Date.parse(options.endDate, this.format));
+                this.endDate = moment(options.endDate, this.format);
 
             if (typeof options.minDate == 'string')
-                this.minDate = moment(Date.parse(options.MinDate, this.format));
+                this.minDate = moment(options.minDate, this.format);
 
             if (typeof options.maxDate == 'string')
-                this.maxDate = moment(Date.parse(options.MaxDate, this.format));
+                this.maxDate = moment(options.maxDate, this.format);
 
 
             if (typeof options.startDate == 'object')
@@ -138,10 +147,10 @@
                     var end = options.ranges[range][1];
 
                     if (typeof start == 'string')
-                        start = Date.parse(start);
+                        start = moment(start);
 
                     if (typeof end == 'string')
-                        end = Date.parse(end);
+                        end = moment(end);
 
                     // If we have a min/max date set, bound this range
                     // to it, but only if it would otherwise fall
@@ -272,8 +281,8 @@
             if (!this.element.is('input')) return;
 
             var dateString = this.element.val().split(this.separator);
-            var start = moment(Date.parseExact(dateString[0], this.format));
-            var end = moment(Date.parseExact(dateString[1], this.format));
+            var start = moment(dateString[0], this.format);
+            var end = moment(dateString[1], this.format);
 
             if (start == null || end == null) return;
             if (end < start) return;
@@ -444,7 +453,7 @@
                 $(e.target).addClass('active');
                 this.changed = true;
                 this.startDate = startDate;
-                this.endDate = startDate.clone().add('days', 1).days();
+                this.endDate = startDate.clone().add('days', 1);
             }
 
             this.leftCalendar.month.month(this.startDate.month()).year(this.startDate.year());
