@@ -52,21 +52,21 @@
                $(document).ready(function() {
                   $('#reportrange').daterangepicker(
                      {
-                        /*ranges: {
-                           'Today': ['today', 'today'],
-                           'Yesterday': ['yesterday', 'yesterday'],
-                           'Last 7 Days': [Date.today().add({ days: -6 }), 'today'],
-                           'Last 30 Days': [Date.today().add({ days: -29 }), 'today'],
-                           'This Month': [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()],
-                           'Last Month': [Date.today().moveToFirstDayOfMonth().add({ months: -1 }), Date.today().moveToFirstDayOfMonth().add({ days: -1 })]
-                        },*/
+                        ranges: {
+                           'Today': [moment(), moment()],
+                           'Yesterday': [moment().add('days', -1), moment().add('days', -1)],
+                           'Last 7 Days': [moment().add('days', -6), moment()],
+                           'Last 30 Days': [moment().add('days', -29), moment()],
+                           'This Month': [moment().startOf('month'), moment().endOf('month')],
+                           'Last Month': [moment().startOf('month').add('months', -1), moment().endOf('month').add('months', -1)]
+                        },
                         opens: 'left',
                         format: 'MM/DD/YYYY',
                         separator: ' to ',
-                        //startDate: Date.today().add({ days: -29 }),
-                        //endDate: Date.today(),
-                        //minDate: '01/01/2012',
-                        //maxDate: '12/31/2013',
+                        startDate: moment().add('days', -29),
+                        endDate: moment(),
+                        minDate: '01/01/2012',
+                        maxDate: '12/31/2013',
                         locale: {
                             applyLabel: 'Submit',
                             fromLabel: 'From',
