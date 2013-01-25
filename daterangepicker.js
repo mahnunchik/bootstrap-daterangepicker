@@ -16,6 +16,15 @@
         var hasOptions = typeof options == 'object';
         var localeObject;
 
+        daysOfWeek = [];
+        monthNames = [];
+        for(var i=0; i<7; i++){
+            daysOfWeek.push(moment().day(i).format('dd'));
+        }
+        for(var i=0; i<12; i++){
+            monthNames.push(moment().month(i).format('MMMM'));
+        }
+
         //state
         this.startDate = moment().startOf('day');
         this.endDate = moment().startOf('day');
@@ -26,7 +35,7 @@
         this.ranges = {};
         this.opens = 'right';
         this.cb = function () { };
-        this.format = 'MM/DD/YYYY';
+        this.format = 'L';
         this.separator = ' - ';
         this.showWeekNumbers = false;
         this.buttonClasses = ['btn-success'];
@@ -37,8 +46,8 @@
             toLabel: 'To',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
-            daysOfWeek: moment.langData()._weekdaysMin,
-            monthNames: moment.langData()._months,
+            daysOfWeek: daysOfWeek,
+            monthNames: monthNames,
             firstDay: 0
         };
 
@@ -444,7 +453,7 @@
                 $(e.target).addClass('active');
                 this.changed = true;
                 this.startDate = startDate;
-                this.endDate = startDate.clone().add('days', 1).days();
+                this.endDate = startDate.clone().add('days', 1);
             }
 
             this.leftCalendar.month.month(this.startDate.month()).year(this.startDate.year());
