@@ -37,8 +37,8 @@
             toLabel: 'To',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
-            daysOfWeek: moment.weekdaysMin,
-            monthNames: moment.months,
+            daysOfWeek: moment.langData()._weekdaysMin,
+            monthNames: moment.langData()._months,
             firstDay: 0
         };
 
@@ -107,16 +107,16 @@
                 this.separator = options.separator;
 
             if (typeof options.startDate == 'string')
-                this.startDate = moment(Date.parse(options.startDate, this.format));
+                this.startDate = moment(options.startDate, this.format);
 
             if (typeof options.endDate == 'string')
-                this.endDate = moment(Date.parse(options.endDate, this.format));
+                this.endDate = moment(options.endDate, this.format);
 
             if (typeof options.minDate == 'string')
-                this.minDate = moment(Date.parse(options.MinDate, this.format));
+                this.minDate = moment(options.MinDate, this.format);
 
             if (typeof options.maxDate == 'string')
-                this.maxDate = moment(Date.parse(options.MaxDate, this.format));
+                this.maxDate = moment(options.MaxDate, this.format);
 
 
             if (typeof options.startDate == 'object')
@@ -138,10 +138,10 @@
                     var end = options.ranges[range][1];
 
                     if (typeof start == 'string')
-                        start = Date.parse(start);
+                        start = moment(start);
 
                     if (typeof end == 'string')
-                        end = Date.parse(end);
+                        end = moment(end);
 
                     // If we have a min/max date set, bound this range
                     // to it, but only if it would otherwise fall
@@ -272,8 +272,8 @@
             if (!this.element.is('input')) return;
 
             var dateString = this.element.val().split(this.separator);
-            var start = moment(Date.parseExact(dateString[0], this.format));
-            var end = moment(Date.parseExact(dateString[1], this.format));
+            var start = moment(dateString[0], this.format);
+            var end = moment(dateString[1], this.format);
 
             if (start == null || end == null) return;
             if (end < start) return;
