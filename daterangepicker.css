@@ -17,12 +17,9 @@
   text-align: left;
 }
 
-.daterangepicker .ranges .range_inputs>div {
-  float: left;
-}
 
-.daterangepicker .ranges .range_inputs>div:nth-child(2) {
-  padding-left: 11px;
+.daterangepicker .ranges .range_buttons {
+  margin-top: 9px;
 }
 
 .daterangepicker .calendar {
@@ -46,6 +43,7 @@
 
 .daterangepicker .ranges input {
   font-size: 11px;
+  padding: 6px 4px;
 }
 
 .daterangepicker .ranges ul {

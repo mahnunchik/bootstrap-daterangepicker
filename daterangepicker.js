@@ -103,16 +103,20 @@
                 '<div class="calendar right"></div>' +
                 '<div class="ranges">' +
                   '<div class="range_inputs">' +
-                    '<div class="daterangepicker_start_input" style="float: left">' +
-                      '<label for="daterangepicker_start">' + this.locale.fromLabel + '</label>' +
-                      '<input class="input-mini" type="text" name="daterangepicker_start" value="" disabled="disabled" />' +
+                    '<div class="row">' +
+                        '<div class="span6 daterangepicker_start_input">' +
+                          '<label for="daterangepicker_start">' + this.locale.fromLabel + '</label>' +
+                          '<input type="text"  name="daterangepicker_start" value="" disabled="disabled" />' +
+                        '</div>' +
+                        '<div class="span6 daterangepicker_end_input">' +
+                          '<label for="daterangepicker_end">' + this.locale.toLabel + '</label>' +
+                          '<input type="text" name="daterangepicker_end" value="" disabled="disabled" />' +
+                        '</div>' +
                     '</div>' +
-                    '<div class="daterangepicker_end_input" style="float: left; padding-left: 11px">' +
-                      '<label for="daterangepicker_end">' + this.locale.toLabel + '</label>' +
-                      '<input class="input-mini" type="text" name="daterangepicker_end" value="" disabled="disabled" />' +
-                    '</div>' +
-                    '<button class="' + this.applyClass + ' applyBtn" disabled="disabled">' + this.locale.applyLabel + '</button>&nbsp;' +
-                    '<button class="' + this.clearClass + ' clearBtn">' + this.locale.clearLabel + '</button>' +
+                    '<div class="range_buttons">' +
+                        '<button class="' + this.applyClass + ' applyBtn" disabled="disabled">' + this.locale.applyLabel + '</button>&nbsp;' +
+                        '<button class="' + this.clearClass + ' clearBtn">' + this.locale.clearLabel + '</button>' +
+                    '</div>'
                   '</div>' +
                 '</div>' +
               '</div>';
@@ -646,7 +650,7 @@
                 html += '<th></th>';
             
             if (!minDate || minDate < calendar[1][1]) {
-                html += '<th class="prev available"><i class="icon-arrow-left"></i></th>';
+                html += '<th class="prev available"><i class="glyphicon glyphicon-arrow-left"></i></th>';
             } else {
                 html += '<th></th>';
             }
@@ -659,7 +663,7 @@
             
             html += '<th colspan="5" style="width: auto">' + dateHtml + '</th>';
             if (!maxDate || maxDate > calendar[1][1]) {
-                html += '<th class="next available"><i class="icon-arrow-right"></i></th>';
+                html += '<th class="next available"><i class="glyphicon glyphicon-arrow-right"></i></th>';
             } else {
                 html += '<th></th>';
             }
