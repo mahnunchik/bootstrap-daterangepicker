@@ -322,6 +322,7 @@
             if (!this.element.is('input')) return;
 
             var dateString = this.element.val().split(this.separator);
+            if(dateString.length < 2) return;
             var start = moment(dateString[0], this.format);
             var end = moment(dateString[1], this.format);
 
